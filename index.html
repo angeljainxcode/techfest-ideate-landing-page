@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techfest 30 — IIT Bombay · 2026</title>
+<meta name="description" content="Techfest, IIT Bombay. Asia's largest science &amp; technology festival returns for its 30th edition. Technology doesn't wait. Neither do we.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+ul{list-style:none;}
+
+/* ============ TOKENS ============ */
+:root{
+  --ink:#0b0b0a;
+  --paper:#f6f4ec;
+  --paper-2:#efece0;
+  --white:#ffffff;
+  --accent:#ff3b1f;
+  --accent-2:#ff6a45;
+  --accent-tint:#ffe1d6;
+  --gray:#6d6c62;
+  --gray-light:#9a988a;
+  --line:#d8d5c6;
+  --font-display:'Big Shoulders Display', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+  --font-hand:'Caveat', cursive;
+  --container:1440px;
+  --pad:6vw;
+  --ease:cubic-bezier(.16,.84,.32,1);
+}
+@media (max-width:768px){:root{--pad:6.5vw;}}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+@media (pointer:fine){ body.cd-on{cursor:none;} body.cd-on a,body.cd-on button{cursor:none;} }
+
+::selection{background:var(--ink);color:var(--paper);}
+
+/* grain */
+.grain{position:fixed;inset:0;z-index:250;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* custom cursor */
+.cursor{position:fixed;top:0;left:0;width:38px;height:38px;border:1.5px solid var(--ink);border-radius:50%;
+  pointer-events:none;z-index:400;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s,border-color .3s;
+  display:flex;align-items:center;justify-content:center;mix-blend-mode:difference;}
+.cursor span{font-family:var(--font-mono);font-size:.58rem;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);opacity:0;transition:opacity .25s;white-space:nowrap;}
+.cursor.big{width:82px;height:82px;background:var(--accent);border-color:var(--accent);}
+.cursor.big span{opacity:1;}
+.cursor.stamp{transition:transform .12s ease-out;transform:translate(-50%,-50%) scale(.72);}
+@media(pointer:coarse){.cursor{display:none;}}
+
+.eyebrow{
+  font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);
+  display:inline-flex;align-items:center;gap:.6em;
+}
+.eyebrow::before{content:"";width:7px;height:7px;background:var(--accent);border-radius:50%;flex:none;}
+.sticker{
+  display:inline-flex;align-items:center;gap:.5em;
+  font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--paper);border:1.5px solid var(--ink);border-radius:100px;
+  padding:.55em 1.1em;transform:rotate(-2deg);
+}
+.ast{color:var(--accent);font-size:1em;}
+
+.container{max-width:var(--container);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad);}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;font-family:var(--font-mono);font-size:.82rem;
+  letter-spacing:.06em;text-transform:uppercase;padding:1.05em 1.7em;border-radius:100px;border:1.5px solid var(--ink);
+  transition:transform .3s var(--ease), background .3s, color .3s, border-color .3s, box-shadow .3s;position:relative;
+}
+.btn svg{transition:transform .4s var(--ease);}
+.btn:hover svg{transform:translateX(4px) rotate(-8deg);}
+.btn-solid{background:var(--ink);color:var(--paper);}
+.btn-solid:hover{background:var(--accent);border-color:var(--accent);color:var(--white);box-shadow:5px 5px 0 var(--ink);transform:translate(-2px,-2px);}
+.btn-outline{background:transparent;color:var(--ink);}
+.btn-outline:hover{background:var(--ink);color:var(--paper);}
+.btn-accent{background:var(--accent);border-color:var(--accent);color:var(--white);}
+.btn-accent:hover{background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 var(--accent);transform:translate(-2px,-2px);}
+.btn-light{border-color:var(--paper);color:var(--paper);}
+.btn-light:hover{background:var(--paper);color:var(--ink);}
+
+.section-tag{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);display:inline-flex;align-items:center;gap:.5em;}
+
+[data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease), transform .9s var(--ease);}
+[data-reveal].is-visible{opacity:1;transform:translateY(0);}
+[data-reveal-delay="1"]{transition-delay:.08s;}
+[data-reveal-delay="2"]{transition-delay:.16s;}
+[data-reveal-delay="3"]{transition-delay:.24s;}
+[data-reveal-delay="4"]{transition-delay:.32s;}
+
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}}
+
+/* duotone photo unit */
+.photo{position:relative;overflow:hidden;background:var(--ink);}
+.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter .6s var(--ease), transform .7s var(--ease);}
+.photo .duo{position:absolute;inset:0;background:var(--accent);mix-blend-mode:color;opacity:.6;transition:opacity .55s var(--ease);}
+.photo:hover img{filter:grayscale(0) contrast(1.05);transform:scale(1.055);}
+.photo:hover .duo{opacity:0;}
+
+/* tape */
+.tape{position:absolute;width:64px;height:24px;background:rgba(246,244,236,.75);border:1px solid rgba(11,11,10,.15);box-shadow:0 3px 8px rgba(0,0,0,.15);}
+
+/* ============ PRELOADER ============ */
+#preloader{position:fixed;inset:0;z-index:999;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;transition:transform .85s var(--ease);}
+#preloader.done{transform:translateY(-100%);}
+#preloader .count{font-family:var(--font-display);font-weight:800;font-size:13vw;color:var(--paper);line-height:1;font-variant-numeric:tabular-nums;}
+#preloader .stampline{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-light);}
+
+/* ============ NAV ============ */
+header.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.25rem var(--pad);display:flex;align-items:center;justify-content:space-between;transition:background .4s var(--ease), border-color .4s var(--ease), padding .4s var(--ease);border-bottom:1px solid transparent;}
+header.site-nav.scrolled{background:rgba(246,244,236,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:.85rem;padding-bottom:.85rem;}
+.brand{display:flex;align-items:center;gap:.75rem;}
+.brand-mark{width:40px;height:40px;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-weight:600;font-size:.62rem;line-height:1.1;text-align:center;border:1.5px dashed var(--paper);transform:rotate(-4deg);}
+.brand-word{font-family:var(--font-display);font-weight:800;font-size:1.34rem;letter-spacing:.01em;line-height:1;}
+.brand-word small{display:block;font-family:var(--font-mono);font-weight:400;font-size:.6rem;letter-spacing:.14em;color:var(--gray);text-transform:uppercase;margin-top:.18rem;}
+.nav-links{display:flex;align-items:center;gap:2.1rem;}
+.nav-links a{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;position:relative;padding-bottom:3px;}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--accent);transition:width .35s var(--ease);}
+.nav-links a:hover::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:1.6rem;}
+.nav-cta{display:none;}
+@media(min-width:1000px){.nav-cta{display:inline-flex;}}
+.burger{display:flex;flex-direction:column;gap:5px;width:26px;}
+.burger span{height:2px;background:var(--ink);width:100%;transition:transform .35s var(--ease), opacity .35s;}
+@media(min-width:1000px){.burger{display:none;}}
+@media(max-width:999px){.nav-links{display:none;}}
+.mobile-menu{position:fixed;inset:0;z-index:190;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:1.3rem;padding:8vw;transform:translateY(-100%);transition:transform .55s var(--ease);}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{font-family:var(--font-display);font-weight:700;font-size:2.6rem;text-transform:uppercase;}
+.mobile-menu .btn{margin-top:1rem;align-self:flex-start;}
+
+/* ============ HERO ============ */
+.hero{min-height:100svh;position:relative;padding-top:8.5rem;overflow:hidden;display:flex;flex-direction:column;justify-content:center;}
+.hero-bgtype{position:absolute;top:8%;left:-6%;font-family:var(--font-display);font-weight:800;font-size:22vw;color:transparent;-webkit-text-stroke:1.5px rgba(11,11,10,.08);text-transform:uppercase;white-space:nowrap;transform:rotate(-3deg);pointer-events:none;z-index:0;line-height:1;}
+.hero-inner{position:relative;z-index:2;}
+.hero-top{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.6rem;}
+.hero-headline{position:relative;}
+.hero-headline .row1{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(2.2rem,5.2vw,4rem);line-height:.92;}
+.hero-num-row{display:flex;align-items:center;gap:2vw;flex-wrap:wrap;margin:.2rem 0;}
+.hero-num{
+  font-family:var(--font-display);font-weight:900;font-size:clamp(6.5rem,19vw,15rem);line-height:.78;
+  color:var(--ink);position:relative;-webkit-text-stroke:2px var(--ink);
+  background:linear-gradient(180deg,var(--ink) 0 100%);-webkit-background-clip:text;background-clip:text;
+}
+.hero-num .fill{color:var(--accent);-webkit-text-stroke:0;}
+.hero-headline .row3{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:clamp(2.2rem,5.2vw,4rem);line-height:.92;}
+.hero-tagrow{display:flex;align-items:center;gap:.9rem;margin-top:1.4rem;flex-wrap:wrap;}
+.hero-tagrow .code{font-family:var(--font-mono);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;}
+.hero-sub{max-width:38ch;margin-top:1.3rem;font-size:1.05rem;color:var(--gray);}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.2rem;}
+
+.hero-photos{position:absolute;z-index:3;pointer-events:auto;}
+.hp1{width:min(210px,26vw);height:min(260px,32vw);top:9%;right:9%;transform:rotate(6deg);}
+.hp2{width:min(150px,20vw);height:min(190px,25vw);top:44%;right:2%;transform:rotate(-5deg);}
+.hp3{width:min(150px,20vw);height:min(120px,18vw);bottom:6%;right:22%;transform:rotate(3deg);}
+.hero-photos .card{width:100%;height:100%;background:var(--white);padding:.5rem;box-shadow:0 18px 34px -14px rgba(0,0,0,.35);}
+.hero-photos .photo{width:100%;height:100%;}
+.hero-photos .tape{top:-12px;left:50%;transform:translateX(-50%) rotate(-4deg);}
+.hero-photos .cap{position:absolute;left:.75rem;bottom:.75rem;color:var(--white);font-family:var(--font-hand);font-size:1.3rem;text-shadow:0 2px 8px rgba(0,0,0,.55);z-index:2;}
+.ticket-chip{
+  position:absolute;left:9%;bottom:11%;z-index:4;background:var(--paper);border:1.5px solid var(--ink);
+  padding:1.1rem 1.4rem;display:flex;flex-direction:column;gap:.2rem;transform:rotate(-3deg);
+  box-shadow:6px 6px 0 var(--ink);
+}
+.ticket-chip .row{display:flex;justify-content:space-between;gap:1.2rem;align-items:baseline;}
+.ticket-chip .admit{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);}
+.ticket-chip .big{font-family:var(--font-display);font-weight:800;font-size:1.5rem;}
+@media(max-width:960px){.hero-photos,.ticket-chip{display:none;}.hero-bgtype{font-size:34vw;}}
+
+.scroll-cue{position:absolute;right:var(--pad);bottom:1.6rem;z-index:3;display:flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);}
+.scroll-cue .bar{width:1px;height:34px;background:var(--ink);position:relative;overflow:hidden;}
+.scroll-cue .bar::after{content:"";position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--accent);animation:scrollcue 1.8s ease-in-out infinite;}
+@keyframes scrollcue{0%{top:-100%;}50%{top:0;}100%{top:100%;}}
+@media(max-width:700px){.scroll-cue{display:none;}}
+
+/* ============ MARQUEE STACK ============ */
+.marquee-stack{position:relative;z-index:5;transform:rotate(-1deg);margin:-1rem 0 1.4rem;}
+.marquee-wrap{background:var(--ink);color:var(--paper);padding:.95rem 0;overflow:hidden;}
+.marquee-wrap.alt{background:var(--accent);color:var(--white);transform:rotate(1.4deg);margin-top:-.6rem;}
+.marquee{display:flex;width:max-content;}
+.marquee.dir1{animation:marquee 24s linear infinite;}
+.marquee.dir2{animation:marquee-rev 20s linear infinite;}
+.marquee span{font-family:var(--font-display);font-weight:700;text-transform:uppercase;font-size:1.4rem;letter-spacing:.02em;padding:0 1.3rem;white-space:nowrap;display:flex;align-items:center;gap:1.3rem;}
+.marquee span::after{content:"✱";font-size:.8em;}
+.marquee-wrap:not(.alt) span::after{color:var(--accent);}
+.marquee-wrap.alt span::after{color:var(--ink);}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes marquee-rev{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+
+/* ============ SECTION SHELL ============ */
+.section{padding:8.5rem 0;position:relative;}
+.section-pad-sm{padding:6rem 0;}
+.head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3.2rem;flex-wrap:wrap;}
+.head-row .section-tag{margin-bottom:1rem;}
+.statement{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(2.2rem,4.6vw,4.1rem);line-height:1;letter-spacing:-.01em;max-width:17ch;position:relative;}
+.statement .accent{color:var(--accent);}
+.statement .muted{color:var(--gray-light);}
+.statement .scribble{position:relative;display:inline-block;}
+.statement .scribble svg{position:absolute;left:0;bottom:-.12em;width:100%;height:.3em;}
+
+/* ============ SECTION 01 — TICKET STATS ============ */
+.tickets-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:4rem;}
+@media(max-width:900px){.tickets-row{grid-template-columns:repeat(2,1fr);}}
+.ticket{
+  position:relative;background:var(--white);border:1.5px solid var(--ink);padding:1.9rem 1.5rem 1.6rem;
+  transform:rotate(var(--r,0deg));transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.ticket:nth-child(1){--r:-1.4deg;}
+.ticket:nth-child(2){--r:1deg;}
+.ticket:nth-child(3){--r:-.8deg;}
+.ticket:nth-child(4){--r:1.6deg;}
+.ticket:hover{transform:rotate(0deg) translateY(-4px);box-shadow:7px 7px 0 var(--accent);}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:16px;height:16px;background:var(--paper);border-radius:50%;transform:translateY(-50%);border:1.5px solid var(--ink);}
+.ticket::before{left:-9px;}
+.ticket::after{right:-9px;}
+.t-code{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-light);}
+.t-num{font-family:var(--font-display);font-weight:800;font-size:clamp(2.3rem,4vw,3.3rem);display:flex;align-items:baseline;gap:.15rem;line-height:1;margin-top:.4rem;}
+.t-num .suffix{font-size:.42em;color:var(--accent);}
+.t-divider{border-top:1.5px dashed var(--line);margin:.9rem 0;}
+.t-label{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gray);}
+
+/* ============ GALLERY STRIP ============ */
+.gallery-band{background:var(--ink);padding:4.5rem 0;overflow:hidden;position:relative;}
+.gallery-band .section-tag{color:var(--gray-light);padding-left:var(--pad);margin-bottom:1.8rem;display:block;}
+.gallery-track{display:flex;gap:1rem;width:max-content;cursor:grab;padding-left:var(--pad);}
+.gallery-track.dragging{cursor:grabbing;}
+.gallery-track.autoplay{animation:gscroll 40s linear infinite;}
+.gallery-track.autoplay.paused{animation-play-state:paused;}
+@keyframes gscroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.g-item{flex:0 0 auto;width:min(260px,60vw);height:330px;position:relative;user-select:none;}
+.g-item .cap{position:absolute;left:.9rem;bottom:.9rem;z-index:2;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--white);}
+
+/* ============ SECTION 02 — WHAT'S HAPPENING ============ */
+.happening{background:var(--paper-2);}
+.tabs{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:3rem;}
+.tab-btn{font-family:var(--font-mono);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;padding:.85em 1.5em;border:1.5px solid var(--ink);border-radius:100px;color:var(--ink);transition:all .3s var(--ease);display:flex;align-items:center;gap:.6em;background:var(--paper);}
+.tab-btn .n{color:var(--gray-light);}
+.tab-btn.active{background:var(--ink);color:var(--paper);box-shadow:4px 4px 0 var(--accent);transform:translate(-2px,-2px);}
+.tab-btn.active .n{color:var(--accent-2);}
+.tab-btn:not(.active):hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink);}
+.tab-panels{position:relative;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadein .5s var(--ease);}
+@keyframes fadein{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem 1.4rem;}
+@media(max-width:900px){.event-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.event-grid{grid-template-columns:1fr;}}
+.event-card{
+  background:var(--white);border:1.5px solid var(--ink);padding:1.9rem 1.7rem;min-height:210px;
+  display:flex;flex-direction:column;justify-content:space-between;transform:rotate(var(--r,0deg));
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.event-card:nth-child(6n+1){--r:-1deg;}
+.event-card:nth-child(6n+2){--r:.8deg;}
+.event-card:nth-child(6n+3){--r:-.5deg;}
+.event-card:nth-child(6n+4){--r:1.2deg;}
+.event-card:nth-child(6n+5){--r:-1.3deg;}
+.event-card:nth-child(6n+6){--r:.6deg;}
+.event-card:hover{transform:rotate(0deg) translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink);}
+.event-card .tag{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);}
+.event-card h3{font-family:var(--font-display);font-weight:700;font-size:1.5rem;text-transform:uppercase;margin-top:1.1rem;line-height:1.04;}
+.event-card p{font-size:.86rem;color:var(--gray);margin-top:.7rem;max-width:32ch;}
+.event-card .arrow{margin-top:1.3rem;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;transition:all .3s var(--ease);align-self:flex-end;}
+.event-card:hover .arrow{background:var(--accent);border-color:var(--accent);color:var(--white);transform:rotate(45deg);}
+
+/* ============ SECTION 03 — PULSE ============ */
+.pulse-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:2.4rem;flex-wrap:wrap;}
+.live-badge{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;padding:.5em 1em;border:1.5px solid var(--ink);border-radius:100px;background:var(--white);}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.4s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
+.pulse-scroller{display:flex;gap:1.1rem;overflow-x:auto;padding-bottom:1.4rem;scroll-snap-type:x proximity;-ms-overflow-style:none;scrollbar-width:none;cursor:grab;}
+.pulse-scroller.dragging{cursor:grabbing;}
+.pulse-scroller::-webkit-scrollbar{display:none;}
+.pulse-card{flex:0 0 auto;width:min(270px,70vw);scroll-snap-align:start;border:1.5px solid var(--ink);padding:1.6rem 1.4rem;background:var(--white);transition:transform .35s var(--ease), box-shadow .35s var(--ease);user-select:none;}
+.pulse-card:hover{transform:translateY(-6px);box-shadow:6px 6px 0 var(--ink);}
+.pulse-card.now{background:var(--accent);color:var(--white);border-color:var(--accent);}
+.pulse-card.now:hover{box-shadow:6px 6px 0 var(--ink);}
+.pulse-time{font-family:var(--font-display);font-weight:800;font-size:2rem;line-height:1;}
+.pulse-card .loc{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gray);margin-top:.85rem;}
+.pulse-card.now .loc{color:rgba(255,255,255,.8);}
+.pulse-card .ev{font-weight:600;font-size:1rem;margin-top:.3rem;}
+.pulse-controls{display:flex;gap:.6rem;}
+.pulse-btn{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.pulse-btn:hover{background:var(--ink);color:var(--paper);}
+
+/* ============ SECTION 04 — TIMELINE (stamped passport) ============ */
+.timeline-wrap{overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none;cursor:grab;}
+.timeline-wrap.dragging{cursor:grabbing;}
+.timeline-wrap::-webkit-scrollbar{display:none;}
+.timeline-track{display:flex;gap:1.4rem;min-width:max-content;padding-bottom:.6rem;}
+.era{width:min(300px,76vw);padding:2rem 1.7rem;border:1.5px solid var(--ink);position:relative;cursor:pointer;background:var(--white);transform:rotate(var(--r,0deg));transition:transform .3s var(--ease), box-shadow .3s var(--ease);user-select:none;}
+.era:nth-child(odd){--r:-1deg;}
+.era:nth-child(even){--r:.9deg;}
+.era .yr{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;color:var(--gray);}
+.era h3{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,4.4vw,2.9rem);margin-top:.4rem;color:var(--ink);transition:color .35s var(--ease);line-height:.95;}
+.era p{margin-top:.9rem;color:var(--gray);max-width:26ch;font-size:.88rem;opacity:0;max-height:0;overflow:hidden;transition:opacity .35s var(--ease), max-height .35s var(--ease), margin .35s var(--ease);}
+.era .stamp{position:absolute;top:1rem;right:1rem;width:44px;height:44px;border-radius:50%;border:1.5px dashed var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.6rem;color:var(--line);transition:all .35s var(--ease);transform:rotate(12deg);}
+.era.active{box-shadow:6px 6px 0 var(--accent);transform:rotate(0deg) translateY(-4px);}
+.era.active h3{color:var(--accent);}
+.era.active p{opacity:1;max-height:200px;margin-top:.9rem;}
+.era.active .stamp{border-color:var(--accent);color:var(--accent);}
+
+/* ============ SECTION 05 — SCRAPBOOK PEOPLE ============ */
+.people-copy{max-width:20ch;margin-bottom:1rem;}
+.people-hand{font-family:var(--font-hand);font-size:1.5rem;color:var(--accent);transform:rotate(-2deg);display:inline-block;margin-bottom:3rem;}
+.scrapbook{position:relative;height:clamp(460px,54vw,680px);}
+.sb-item{position:absolute;background:var(--white);padding:.6rem .6rem 2.1rem;box-shadow:0 22px 40px -18px rgba(0,0,0,.35);transition:transform .4s var(--ease), z-index 0s;}
+.sb-item:hover{transform:scale(1.05) rotate(0deg) !important;z-index:20 !important;}
+.sb-item .photo{width:100%;height:100%;}
+.sb-item .tape{top:-14px;left:50%;transform:translateX(-50%) rotate(-5deg);}
+.sb-item .cap{position:absolute;left:.9rem;bottom:.55rem;font-family:var(--font-hand);font-size:1.35rem;color:var(--ink);}
+.sb1{width:27%;height:52%;left:0;top:4%;transform:rotate(-6deg);z-index:2;}
+.sb2{width:23%;height:38%;left:24%;top:0;transform:rotate(4deg);z-index:3;}
+.sb3{width:22%;height:60%;left:34%;top:34%;transform:rotate(-3deg);z-index:4;}
+.sb4{width:26%;height:44%;right:14%;top:8%;transform:rotate(5deg);z-index:2;}
+.sb5{width:20%;height:36%;right:0;top:50%;transform:rotate(-4deg);z-index:3;}
+@media(max-width:820px){
+  .scrapbook{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:1.3rem 1rem;position:static;}
+  .sb-item{position:static !important;width:100% !important;height:210px !important;transform:none !important;}
+  .sb3{grid-column:span 2;height:240px !important;}
+}
+
+/* ============ SECTION 06 — WHY TECHFEST ============ */
+.why{background:var(--ink);color:var(--paper);position:relative;overflow:hidden;}
+.why .section-tag{color:var(--gray-light);}
+.why-statement{text-align:center;max-width:22ch;margin:0 auto 4.4rem;color:var(--paper);}
+.why-statement .accent{color:var(--accent-2);}
+.why-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;}
+@media(max-width:840px){.why-cols{grid-template-columns:1fr;}}
+.why-col{padding:2.2rem 1.8rem;border:1.5px solid rgba(246,244,236,.25);transform:rotate(var(--r,0deg));transition:transform .3s var(--ease), border-color .3s;}
+.why-col:nth-child(1){--r:-1deg;}
+.why-col:nth-child(2){--r:1deg;}
+.why-col:nth-child(3){--r:-.6deg;}
+.why-col:hover{transform:rotate(0deg) translateY(-4px);border-color:var(--accent);}
+.why-col .idx{font-family:var(--font-mono);font-size:.72rem;color:var(--accent-2);}
+.why-col h3{font-family:var(--font-display);font-weight:800;font-size:1.85rem;text-transform:uppercase;margin-top:.7rem;}
+.why-col p{margin-top:.85rem;color:var(--gray-light);font-size:.93rem;max-width:32ch;}
+
+/* ============ SECTION 07 — ECOSYSTEM STICKER SHEET ============ */
+.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;}
+@media(max-width:960px){.eco-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.eco-grid{grid-template-columns:1fr;}}
+.eco-item{position:relative;aspect-ratio:1/1.02;border:1.5px solid var(--ink);overflow:hidden;transform:rotate(var(--r,0deg));transition:transform .35s var(--ease), box-shadow .35s var(--ease);}
+.eco-item:nth-child(4n+1){--r:-1.4deg;}
+.eco-item:nth-child(4n+2){--r:1deg;}
+.eco-item:nth-child(4n+3){--r:-.7deg;}
+.eco-item:nth-child(4n+4){--r:1.5deg;}
+.eco-item:hover{transform:rotate(0deg) translateY(-5px);box-shadow:7px 7px 0 var(--accent);}
+.eco-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter .5s var(--ease), transform .6s var(--ease);}
+.eco-item:hover img{filter:grayscale(0) contrast(1.05);transform:scale(1.06);}
+.eco-item::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.78) 100%);}
+.eco-inner{position:relative;z-index:2;height:100%;padding:1.4rem;display:flex;flex-direction:column;justify-content:space-between;}
+.eco-inner .n{font-family:var(--font-mono);font-size:.68rem;color:rgba(255,255,255,.8);background:rgba(11,11,10,.5);align-self:flex-start;padding:.2em .5em;border-radius:100px;}
+.eco-inner h3{font-family:var(--font-display);font-weight:800;font-size:1.5rem;text-transform:uppercase;line-height:1;color:var(--white);}
+
+/* ============ SECTION 08 — FINAL CTA (tear-off ticket) ============ */
+.final-cta{background:var(--ink);color:var(--paper);text-align:center;padding:10rem 0 7rem;position:relative;overflow:hidden;}
+.final-cta .eyebrow{justify-content:center;color:var(--gray-light);}
+.final-cta h2{font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(2.6rem,7.2vw,5.8rem);line-height:.92;margin:1.5rem 0 2.4rem;}
+.final-cta h2 .accent{color:var(--accent);}
+.final-cta .tagline{font-family:var(--font-mono);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-light);margin-bottom:2.4rem;}
+.tear{position:relative;display:inline-block;}
+.tear-line{border:none;border-top:2px dashed rgba(246,244,236,.35);width:min(420px,80vw);margin:0 auto 2rem;}
+
+/* ============ FOOTER ============ */
+footer{background:var(--ink);color:var(--paper);border-top:1px solid rgba(246,244,236,.15);padding:4rem 0 2rem;}
+.foot-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2.4rem;padding-bottom:3.2rem;}
+@media(max-width:820px){.foot-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.foot-top{grid-template-columns:1fr;}}
+.foot-brand .brand-word{color:var(--paper);}
+.foot-brand p{margin-top:1.05rem;color:var(--gray-light);max-width:32ch;font-size:.92rem;}
+.foot-col h4{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-light);margin-bottom:.9rem;}
+.foot-col a{display:block;padding:.32rem 0;color:var(--paper);font-size:.94rem;transition:color .3s;}
+.foot-col a:hover{color:var(--accent-2);}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding-top:1.8rem;border-top:1px solid rgba(246,244,236,.15);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-light);}
+.foot-social{display:flex;gap:1.1rem;}
+.foot-social a{color:var(--paper);}
+.foot-social a:hover{color:var(--accent-2);}
+
+.mt-lg{margin-top:3.6rem;}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor" id="cursor"><span id="cursorLabel"></span></div>
+
+<div id="preloader">
+  <div class="count">0<span id="preCount">0</span></div>
+  <div class="stampline">Techfest · Edition 30 · Loading</div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="site-nav" id="siteNav">
+  <a href="#top" class="brand" data-cursor="HOME">
+    <span class="brand-mark">TF<br>30</span>
+    <span class="brand-word">TECHFEST<small>IIT Bombay · Est. 1998</small></span>
+  </a>
+  <nav class="nav-links">
+    <a href="#happening" data-cursor="VIEW">Compete</a>
+    <a href="#happening" data-cursor="VIEW">Experience</a>
+    <a href="#happening" data-cursor="VIEW">Learn</a>
+    <a href="#happening" data-cursor="VIEW">Meet</a>
+    <a href="#pulse" data-cursor="VIEW">Pulse</a>
+    <a href="#legacy" data-cursor="VIEW">Legacy</a>
+  </nav>
+  <div class="nav-right">
+    <a href="#" class="btn btn-solid nav-cta" data-cursor="GO">Register <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#happening">Compete</a>
+  <a href="#happening">Experience</a>
+  <a href="#happening">Learn</a>
+  <a href="#happening">Meet</a>
+  <a href="#pulse">Pulse</a>
+  <a href="#legacy">Legacy</a>
+  <a href="#" class="btn btn-light">Register →</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-bgtype">TECHFEST TECHFEST TECHFEST TECHFEST</div>
+    <div class="container hero-inner">
+      <div class="hero-top">
+        <span class="sticker"><span class="ast">✱</span> Asia's Largest Tech Fest <span class="ast">✱</span></span>
+      </div>
+      <div class="hero-headline">
+        <div class="row1">The Next</div>
+        <div class="hero-num-row">
+          <div class="hero-num"><span class="fill">30</span></div>
+        </div>
+        <div class="row3">Years Start Here.</div>
+      </div>
+      <div class="hero-tagrow">
+        <span class="code">TECHFEST 30 · IIT BOMBAY · 2026</span>
+      </div>
+      <p class="hero-sub">India's largest technology festival returns for its 30th edition. Three decades of building, competing and imagining what's next — under one roof, for four days.</p>
+      <div class="hero-ctas">
+        <a href="#happening" class="btn btn-solid" data-cursor="GO">Explore Techfest <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#pulse" class="btn btn-outline" data-cursor="GO">View Events <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+
+    <div class="hero-photos hp1">
+      <div class="card">
+        <div class="photo" data-cursor="1998→2026">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80" alt="Techfest stage lights">
+          <div class="duo"></div>
+          <span class="cap">main stage</span>
+        </div>
+      </div>
+      <div class="tape"></div>
+    </div>
+    <div class="hero-photos hp2">
+      <div class="card">
+        <div class="photo" data-cursor="MEET">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="Robotics arena">
+          <div class="duo"></div>
+          <span class="cap">robowars</span>
+        </div>
+      </div>
+      <div class="tape"></div>
+    </div>
+    <div class="hero-photos hp3">
+      <div class="card">
+        <div class="photo" data-cursor="LEARN">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Team building hardware">
+          <div class="duo"></div>
+          <span class="cap">the build</span>
+        </div>
+      </div>
+      <div class="tape"></div>
+    </div>
+
+    <div class="ticket-chip">
+      <div class="admit">Admit One · Techfest 30</div>
+      <div class="row"><span class="big">180K+</span></div>
+      <div class="admit">Attendees on campus, 2025</div>
+    </div>
+
+    <div class="scroll-cue"><span>Scroll</span><span class="bar"></span></div>
+  </section>
+
+  <div class="marquee-stack">
+    <div class="marquee-wrap">
+      <div class="marquee dir1">
+        <span>Technology doesn't wait</span><span>Neither do we</span><span>Techfest 30</span><span>IIT Bombay 2026</span>
+        <span>Technology doesn't wait</span><span>Neither do we</span><span>Techfest 30</span><span>IIT Bombay 2026</span>
+      </div>
+    </div>
+    <div class="marquee-wrap alt">
+      <div class="marquee dir2">
+        <span>Compete</span><span>Experience</span><span>Learn</span><span>Meet</span><span>Edition 30</span>
+        <span>Compete</span><span>Experience</span><span>Learn</span><span>Meet</span><span>Edition 30</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 01 — WHAT IS TECHFEST (TICKETS) ============ -->
+  <section class="section" id="about">
+    <div class="container">
+      <p class="section-tag" data-reveal><span class="ast">✱</span> 01 — What is Techfest</p>
+      <h2 class="statement" data-reveal data-reveal-delay="1">ONE FESTIVAL.<br>THOUSANDS OF <span class="accent">MINDS.</span><br><span class="muted">COUNTLESS POSSIBILITIES.</span></h2>
+
+      <div class="tickets-row">
+        <div class="ticket" data-reveal>
+          <div class="t-code">TF-30 / SN-001</div>
+          <div class="t-num"><span class="js-count" data-count="30">0</span></div>
+          <div class="t-divider"></div>
+          <div class="t-label">Years of Techfest</div>
+        </div>
+        <div class="ticket" data-reveal data-reveal-delay="1">
+          <div class="t-code">TF-30 / SN-002</div>
+          <div class="t-num"><span class="js-count" data-count="180">0</span><span class="suffix">K+</span></div>
+          <div class="t-divider"></div>
+          <div class="t-label">Participants on campus</div>
+        </div>
+        <div class="ticket" data-reveal data-reveal-delay="2">
+          <div class="t-code">TF-30 / SN-003</div>
+          <div class="t-num"><span class="js-count" data-count="20">0</span><span class="suffix">+</span></div>
+          <div class="t-divider"></div>
+          <div class="t-label">Countries represented</div>
+        </div>
+        <div class="ticket" data-reveal data-reveal-delay="3">
+          <div class="t-code">TF-30 / SN-004</div>
+          <div class="t-num">₹<span class="js-count" data-count="1">0</span><span class="suffix">CR+</span></div>
+          <div class="t-divider"></div>
+          <div class="t-label">In prizes &amp; scholarships</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALLERY BAND ============ -->
+  <section class="gallery-band">
+    <span class="section-tag">✱ On Campus — Drag to Explore</span>
+    <div class="gallery-track autoplay" id="galleryTrack">
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=500&q=80" alt="Robot"><div class="duo"></div><span class="cap">robotics arena</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80" alt="Students"><div class="duo"></div><span class="cap">team huddle</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=500&q=80" alt="Night crowd"><div class="duo"></div><span class="cap">technoholix</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1591115765373-5207764f72e4?auto=format&fit=crop&w=500&q=80" alt="Drone"><div class="duo"></div><span class="cap">drone show</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=500&q=80" alt="Audience"><div class="duo"></div><span class="cap">keynote stage</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=500&q=80" alt="Robot arm"><div class="duo"></div><span class="cap">build lab</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=500&q=80" alt="Robot"><div class="duo"></div><span class="cap">robotics arena</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80" alt="Students"><div class="duo"></div><span class="cap">team huddle</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=500&q=80" alt="Night crowd"><div class="duo"></div><span class="cap">technoholix</span></div>
+      <div class="g-item photo" data-cursor="DRAG"><img src="https://images.unsplash.com/photo-1591115765373-5207764f72e4?auto=format&fit=crop&w=500&q=80" alt="Drone"><div class="duo"></div><span class="cap">drone show</span></div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 02 — WHAT'S HAPPENING ============ -->
+  <section class="section happening" id="happening">
+    <div class="container">
+      <div class="head-row">
+        <div>
+          <p class="section-tag" data-reveal><span class="ast">✱</span> 02 — What's Happening</p>
+          <h2 class="statement" data-reveal data-reveal-delay="1">THE ECOSYSTEM,<br>ON ONE CAMPUS.</h2>
+        </div>
+      </div>
+
+      <div class="tabs" data-reveal>
+        <button class="tab-btn active" data-tab="compete" data-cursor="VIEW"><span class="n">01</span> Compete</button>
+        <button class="tab-btn" data-tab="experience" data-cursor="VIEW"><span class="n">02</span> Experience</button>
+        <button class="tab-btn" data-tab="learn" data-cursor="VIEW"><span class="n">03</span> Learn</button>
+        <button class="tab-btn" data-tab="meet" data-cursor="VIEW"><span class="n">04</span> Meet</button>
+      </div>
+
+      <div class="tab-panels">
+        <div class="tab-panel active" id="panel-compete">
+          <div class="event-grid">
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Robotics</span><h3>International Robowars</h3><p>Machines built to fight, in the arena Techfest is famous for.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Coding</span><h3>World Programming Championship</h3><p>Competitive coding against the country's sharpest teams.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">AI</span><h3>Qualcomm VisionX</h3><p>Computer vision challenges built with an industry partner.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Finance</span><h3>Blixathon</h3><p>A fintech case sprint for builders who think in markets.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Game Dev</span><h3>Game of Codes</h3><p>Design, build and ship a playable game against the clock.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Robotics</span><h3>Micromouse Challenge</h3><p>Autonomous maze-solving robots, down to the millisecond.</p></div><div class="arrow">↗</div></div>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-experience">
+          <div class="event-grid">
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Exhibition</span><h3>Tech Expo Floor</h3><p>Humanoids, drones and hardware you won't see anywhere else.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Robotics</span><h3>Humanoid Summit</h3><p>Next-gen humanoid robots from four continents, live on stage.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Culture</span><h3>Ozone</h3><p>International street artists take over the campus grounds.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Night</span><h3>Technoholix</h3><p>The festival's night stage — sound, light and scale.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Skies</span><h3>Drone Light Show</h3><p>Hundreds of drones, one choreographed night sky.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Motorsport</span><h3>Full Throttle</h3><p>Student-built vehicles pushed to their engineering limits.</p></div><div class="arrow">↗</div></div>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-learn">
+          <div class="event-grid">
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">AI/ML</span><h3>Deep Learning Lab</h3><p>Hands-on workshops from foundations to deployment.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Robotics</span><h3>Build-a-Bot</h3><p>Take a robot from bare parts to working prototype.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Product</span><h3>Product &amp; Design Studio</h3><p>Frameworks used by teams shipping real products.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Startups</span><h3>Founder Bootcamp</h3><p>Zero-to-one sessions with people who've done it.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Certified</span><h3>Techfest Courses</h3><p>Certified, industry-graded technical courses on campus.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Data</span><h3>Applied Data Science</h3><p>Real datasets, real problems, real deadlines.</p></div><div class="arrow">↗</div></div>
+          </div>
+        </div>
+        <div class="tab-panel" id="panel-meet">
+          <div class="event-grid">
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Keynote</span><h3>Speaker Sessions</h3><p>Past voices: A.P.J. Abdul Kalam, Vint Cerf, S. Somnath.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Network</span><h3>Founder Meetups</h3><p>Closed-room sessions with builders and early operators.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Industry</span><h3>Partner Pavilions</h3><p>Meet the companies hiring straight off the expo floor.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Network</span><h3>College Ambassador Network</h3><p>2,500+ Indian and 500+ international campuses, one room.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Global</span><h3>Delegate Lounge</h3><p>Where international teams and Indian innovators cross paths.</p></div><div class="arrow">↗</div></div>
+            <div class="event-card" data-cursor="OPEN"><div><span class="tag">Press</span><h3>Media &amp; Press Desk</h3><p>Coverage, interviews and access for accredited press.</p></div><div class="arrow">↗</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 03 — PULSE ============ -->
+  <section class="section section-pad-sm" id="pulse">
+    <div class="container">
+      <div class="pulse-head">
+        <div>
+          <p class="section-tag" data-reveal><span class="ast">✱</span> 03 — The Techfest Pulse</p>
+          <h2 class="statement" data-reveal data-reveal-delay="1" style="font-size:clamp(1.8rem,3.4vw,2.8rem);">HAPPENING RIGHT NOW.</h2>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <span class="live-badge"><span class="live-dot"></span>Day 2 · Live</span>
+          <div class="pulse-controls">
+            <button class="pulse-btn" id="pulsePrev" aria-label="Scroll left" data-cursor="←">←</button>
+            <button class="pulse-btn" id="pulseNext" aria-label="Scroll right" data-cursor="→">→</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pulse-scroller" id="pulseScroller">
+        <div class="pulse-card"><div class="pulse-time">09:00</div><div class="loc">Main Gate</div><div class="ev">Gates Open</div></div>
+        <div class="pulse-card"><div class="pulse-time">10:30</div><div class="loc">Arena A</div><div class="ev">Robotics Arena — Robowars Qualifiers</div></div>
+        <div class="pulse-card now"><div class="pulse-time">12:00</div><div class="loc">Innovation Hall</div><div class="ev">AI Challenge — Finals</div></div>
+        <div class="pulse-card"><div class="pulse-time">14:30</div><div class="loc">Keynote Stage</div><div class="ev">Innovation Talk — Speaker Session</div></div>
+        <div class="pulse-card"><div class="pulse-time">16:00</div><div class="loc">Expo Floor</div><div class="ev">Exhibition Floor Opens</div></div>
+        <div class="pulse-card"><div class="pulse-time">18:00</div><div class="loc">Main Stage</div><div class="ev">Technoholix — Night Show</div></div>
+        <div class="pulse-card"><div class="pulse-time">21:00</div><div class="loc">Open Grounds</div><div class="ev">Drone Light Show</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 04 — 30 YEARS ============ -->
+  <section class="section" id="legacy">
+    <div class="container">
+      <p class="section-tag" data-reveal><span class="ast">✱</span> 04 — Thirty Years of Building</p>
+      <h2 class="statement" data-reveal data-reveal-delay="1">FROM ONE CAMPUS<br>TO A <span class="accent">MOVEMENT.</span></h2>
+    </div>
+    <div class="container timeline-wrap mt-lg" data-reveal data-reveal-delay="2" id="timelineWrap">
+      <div class="timeline-track" id="timelineTrack">
+        <div class="era active" data-era><span class="stamp">1998</span><p class="yr">1998</p><h3>Origin</h3><p>Techfest begins on the IIT Bombay campus — a student idea, a handful of events.</p></div>
+        <div class="era" data-era><span class="stamp">2000s</span><p class="yr">2000s</p><h3>Expansion</h3><p>National reach takes hold. Colleges across India start sending teams to compete.</p></div>
+        <div class="era" data-era><span class="stamp">2010s</span><p class="yr">2010s</p><h3>Global Ecosystem</h3><p>International delegates, global competitions, and Asia's largest footfall in the category.</p></div>
+        <div class="era" data-era><span class="stamp">2020s</span><p class="yr">2020s</p><h3>AI &amp; Robotics</h3><p>Humanoids, deep learning, and emerging tech move to the centre of the festival.</p></div>
+        <div class="era" data-era><span class="stamp">2026</span><p class="yr">2026</p><h3>Techfest 30</h3><p>Thirty years in, the ecosystem is bigger than the festival that started it.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 05 — THE PEOPLE (SCRAPBOOK) ============ -->
+  <section class="section" id="people">
+    <div class="container">
+      <p class="section-tag" data-reveal><span class="ast">✱</span> 05 — The People</p>
+      <h2 class="statement people-copy" data-reveal data-reveal-delay="1">THE FUTURE<br>HAS <span class="accent">FACES.</span></h2>
+      <span class="people-hand" data-reveal data-reveal-delay="2">pinned from the last 30 years ↴</span>
+
+      <div class="scrapbook" data-reveal data-reveal-delay="3">
+        <div class="sb-item sb1"><div class="photo" data-cursor="BUILDERS"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" alt="Students collaborating"><div class="duo"></div></div><div class="tape"></div><span class="cap">builders</span></div>
+        <div class="sb-item sb2"><div class="photo" data-cursor="SPEAKERS"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=500&q=80" alt="Speaker portrait"><div class="duo"></div></div><div class="tape"></div><span class="cap">speakers</span></div>
+        <div class="sb-item sb3"><div class="photo" data-cursor="DELEGATES"><img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=500&q=80" alt="Conference audience"><div class="duo"></div></div><div class="tape"></div><span class="cap">delegates</span></div>
+        <div class="sb-item sb4"><div class="photo" data-cursor="INNOVATORS"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="Team working on hardware"><div class="duo"></div></div><div class="tape"></div><span class="cap">innovators</span></div>
+        <div class="sb-item sb5"><div class="photo" data-cursor="RESEARCHERS"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=500&q=80" alt="Researcher portrait"><div class="duo"></div></div><div class="tape"></div><span class="cap">researchers</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 06 — WHY TECHFEST ============ -->
+  <section class="section why">
+    <div class="container">
+      <p class="section-tag" data-reveal style="text-align:center;justify-content:center;"><span class="ast">✱</span> 06 — Why Techfest</p>
+      <h2 class="statement why-statement" data-reveal data-reveal-delay="1">
+        COME FOR THE COMPETITIONS.<br>
+        <span class="accent">STAY FOR THE IDEAS.</span><br>
+        LEAVE WITH A DIFFERENT VIEW OF THE FUTURE.
+      </h2>
+
+      <div class="why-cols" data-reveal data-reveal-delay="2">
+        <div class="why-col">
+          <p class="idx">01</p>
+          <h3>Compete</h3>
+          <p>₹1 crore+ across robotics, coding, finance and design — against teams from 20+ countries.</p>
+        </div>
+        <div class="why-col">
+          <p class="idx">02</p>
+          <h3>Learn</h3>
+          <p>Workshops and courses built by people shipping the technology, not just teaching it.</p>
+        </div>
+        <div class="why-col">
+          <p class="idx">03</p>
+          <h3>Belong</h3>
+          <p>2,500+ campuses, one weekend. The network you leave with outlasts the festival.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 07 — EXPLORE THE ECOSYSTEM ============ -->
+  <section class="section" id="ecosystem">
+    <div class="container">
+      <p class="section-tag" data-reveal><span class="ast">✱</span> 07 — Explore the Ecosystem</p>
+      <h2 class="statement" data-reveal data-reveal-delay="1">EVERY WAY IN,<br>MAPPED OUT.</h2>
+    </div>
+    <div class="container eco-grid mt-lg" data-reveal data-reveal-delay="2">
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=600&q=80" alt="Competitions"><div class="eco-inner"><span class="n">01</span><h3>Competitions</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?auto=format&fit=crop&w=600&q=80" alt="Exhibitions"><div class="eco-inner"><span class="n">02</span><h3>Exhibitions</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Workshops"><div class="eco-inner"><span class="n">03</span><h3>Workshops</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Talks"><div class="eco-inner"><span class="n">04</span><h3>Talks</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="Robotics"><div class="eco-inner"><span class="n">05</span><h3>Robotics</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=600&q=80" alt="AI"><div class="eco-inner"><span class="n">06</span><h3>AI &amp; Emerging Tech</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Innovation"><div class="eco-inner"><span class="n">07</span><h3>Innovation &amp; Startups</h3></div></a>
+      <a class="eco-item" href="#happening" data-cursor="OPEN"><img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80" alt="Campus experience"><div class="eco-inner"><span class="n">08</span><h3>Campus Experience</h3></div></a>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 08 — FINAL CTA ============ -->
+  <section class="final-cta">
+    <div class="container">
+      <p class="eyebrow">Techfest · IIT Bombay</p>
+      <h2>30 YEARS LATER,<br>WE'RE <span class="accent">JUST</span><br>GETTING STARTED.</h2>
+      <div class="tear"><hr class="tear-line"></div>
+      <p class="tagline">Techfest 30 · IIT Bombay · December 2026</p>
+      <a href="#top" class="btn btn-accent" data-cursor="GO">Enter Techfest <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 19L19 5M19 5H8M19 5V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="brand-word">TECHFEST</span>
+        <p>Techfest, IIT Bombay — Asia's largest science &amp; technology festival. Organised by students, under the patronage of UNESCO and UNICEF, since 1998.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Explore</h4>
+        <a href="#happening">Events</a>
+        <a href="#happening">Competitions</a>
+        <a href="#happening">Workshops</a>
+        <a href="#ecosystem">Exhibitions</a>
+      </div>
+      <div class="foot-col">
+        <h4>Techfest</h4>
+        <a href="#about">About</a>
+        <a href="#legacy">Legacy</a>
+        <a href="#">Sponsors</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <a href="#">contact@techfest.org</a>
+        <a href="#">Powai, Mumbai 400076</a>
+        <a href="#">College Ambassador Login</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Techfest, IIT Bombay · Est. 1998 · Edition 30</span>
+      <div class="foot-social">
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">YouTube</a>
+        <a href="#">X</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- PRELOADER ---------- */
+(function(){
+  var el=document.getElementById('preCount');
+  var pre=document.getElementById('preloader');
+  var n=0;
+  var iv=setInterval(function(){
+    n+=Math.ceil(Math.random()*6)+2;
+    if(n>=30){n=30;clearInterval(iv);}
+    el.textContent=n;
+    if(n===30){
+      setTimeout(function(){pre.classList.add('done');},260);
+    }
+  },55);
+  setTimeout(function(){pre.classList.add('done');},2200);
+})();
+
+/* ---------- CUSTOM CURSOR ---------- */
+(function(){
+  var isFine=window.matchMedia('(pointer:fine)').matches;
+  if(!isFine)return;
+  document.body.classList.add('cd-on');
+  var cursor=document.getElementById('cursor');
+  var label=document.getElementById('cursorLabel');
+  var mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+  window.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+  function loop(){
+    rx+=(mx-rx)*.18; ry+=(my-ry)*.18;
+    cursor.style.left=rx+'px'; cursor.style.top=ry+'px';
+    requestAnimationFrame(loop);
+  }
+  loop();
+  document.querySelectorAll('[data-cursor]').forEach(function(el){
+    el.addEventListener('mouseenter',function(){
+      cursor.classList.add('big');
+      label.textContent=el.getAttribute('data-cursor');
+    });
+    el.addEventListener('mouseleave',function(){
+      cursor.classList.remove('big');
+      label.textContent='';
+    });
+  });
+  window.addEventListener('mousedown',function(){cursor.classList.add('stamp');});
+  window.addEventListener('mouseup',function(){cursor.classList.remove('stamp');});
+})();
+
+/* ---------- NAV SCROLL STATE ---------- */
+var nav=document.getElementById('siteNav');
+window.addEventListener('scroll',function(){
+  if(window.scrollY>16){nav.classList.add('scrolled');}else{nav.classList.remove('scrolled');}
+},{passive:true});
+
+/* ---------- MOBILE MENU ---------- */
+var burger=document.getElementById('burgerBtn');
+var mmenu=document.getElementById('mobileMenu');
+burger.addEventListener('click',function(){mmenu.classList.toggle('open');});
+mmenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mmenu.classList.remove('open');});});
+
+/* ---------- SCROLL REVEALS ---------- */
+var revealEls=document.querySelectorAll('[data-reveal]');
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){en.target.classList.add('is-visible');io.unobserve(en.target);}
+  });
+},{threshold:.14});
+revealEls.forEach(function(el){io.observe(el);});
+
+/* ---------- COUNTERS ---------- */
+var counters=document.querySelectorAll('.js-count');
+var counted=new WeakSet();
+var cio=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting && !counted.has(en.target)){
+      counted.add(en.target);
+      var target=parseFloat(en.target.getAttribute('data-count'));
+      var dur=1300,start=null;
+      function step(ts){
+        if(!start)start=ts;
+        var p=Math.min((ts-start)/dur,1);
+        en.target.textContent=Math.floor(p*target);
+        if(p<1)requestAnimationFrame(step); else en.target.textContent=target;
+      }
+      requestAnimationFrame(step);
+    }
+  });
+},{threshold:.5});
+counters.forEach(function(c){cio.observe(c);});
+
+/* ---------- TABS ---------- */
+var tabBtns=document.querySelectorAll('.tab-btn');
+tabBtns.forEach(function(btn){
+  btn.addEventListener('click',function(){
+    tabBtns.forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+    document.getElementById('panel-'+btn.getAttribute('data-tab')).classList.add('active');
+  });
+});
+
+/* ---------- PULSE SCROLLER CONTROLS ---------- */
+var scroller=document.getElementById('pulseScroller');
+document.getElementById('pulsePrev').addEventListener('click',function(){scroller.scrollBy({left:-300,behavior:'smooth'});});
+document.getElementById('pulseNext').addEventListener('click',function(){scroller.scrollBy({left:300,behavior:'smooth'});});
+
+/* ---------- TIMELINE ERA SELECT ---------- */
+var eras=document.querySelectorAll('[data-era]');
+eras.forEach(function(era){
+  era.addEventListener('click',function(){
+    eras.forEach(function(e){e.classList.remove('active');});
+    era.classList.add('active');
+  });
+});
+
+/* ---------- GENERIC DRAG-SCROLL ---------- */
+function makeDraggable(el){
+  if(!el)return;
+  var isDown=false,startX=0,scrollLeft=0;
+  el.addEventListener('pointerdown',function(e){
+    isDown=true; el.classList.add('dragging');
+    startX=e.clientX; scrollLeft=el.scrollLeft;
+    try{el.setPointerCapture(e.pointerId);}catch(err){}
+  });
+  el.addEventListener('pointermove',function(e){
+    if(!isDown)return;
+    el.scrollLeft=scrollLeft-(e.clientX-startX);
+  });
+  ['pointerup','pointerleave','pointercancel'].forEach(function(evt){
+    el.addEventListener(evt,function(){isDown=false; el.classList.remove('dragging');});
+  });
+}
+makeDraggable(document.getElementById('pulseScroller'));
+makeDraggable(document.getElementById('timelineWrap'));
+
+/* gallery: autoplay marquee, pause + drag on interaction */
+var galleryTrack=document.getElementById('galleryTrack');
+var galleryOuter=galleryTrack.parentElement;
+function pauseGallery(){galleryTrack.classList.add('paused');}
+function resumeGallery(){galleryTrack.classList.remove('paused');}
+galleryOuter.addEventListener('mouseenter',pauseGallery);
+galleryOuter.addEventListener('mouseleave',resumeGallery);
+(function(){
+  var isDown=false,startX=0,scrollLeft=0;
+  galleryTrack.addEventListener('pointerdown',function(e){
+    isDown=true; pauseGallery(); galleryTrack.classList.add('dragging');
+    startX=e.clientX; scrollLeft=galleryOuter.scrollLeft;
+    try{galleryTrack.setPointerCapture(e.pointerId);}catch(err){}
+  });
+  galleryTrack.addEventListener('pointermove',function(e){
+    if(!isDown)return;
+    galleryOuter.scrollLeft=scrollLeft-(e.clientX-startX);
+  });
+  ['pointerup','pointerleave','pointercancel'].forEach(function(evt){
+    galleryTrack.addEventListener(evt,function(){isDown=false; galleryTrack.classList.remove('dragging');});
+  });
+})();
+galleryOuter.style.overflowX='auto';
+galleryOuter.style.scrollbarWidth='none';
+
+/* ---------- SMOOTH ANCHOR OFFSET ---------- */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=a.getAttribute('href');
+    if(id.length>1){
+      var target=document.querySelector(id);
+      if(target){
+        e.preventDefault();
+        var y=target.getBoundingClientRect().top+window.pageYOffset-84;
+        window.scrollTo({top:y,behavior:'smooth'});
+      }
+    }
+  });
+});
+</script>
+</body>
+</html>
